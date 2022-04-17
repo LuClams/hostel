@@ -33,6 +33,25 @@ class Contact
      */
     private $sentAt;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $object;
+
+    /**
+     * @return mixed
+     */
+    public function getObject()
+    {
+        return $this->object;
+    }
+
+    /**
+     * @param mixed $object
+     */
+    public function setObject($object): void
+    {
+        $this->object = $object;
+    }
+
 
     public function getId(): ?int
     {
