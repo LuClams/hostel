@@ -25,6 +25,9 @@ class Room
     #[ORM\Column(type: 'integer')]
     private $price;
 
+    #[ORM\OneToOne(mappedBy: 'room', targetEntity: Booking::class, cascade: ['persist', 'remove'])]
+    private $booking;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +77,23 @@ class Room
     public function setPrice(int $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getBooking(): ?Booking
+    {
+        return $this->booking;
+    }
+
+    public function setBooking(Booking $booking): self
+    {
+        // set the owning side of the relation if necessary
+        if ($booking->getRoom() !== $this) {
+            $booking->setRoom($this);
+        }
+
+        $this->booking = $booking;
 
         return $this;
     }

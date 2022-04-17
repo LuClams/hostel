@@ -35,6 +35,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
+    #[ORM\OneToOne(mappedBy: 'booker', targetEntity: Booking::class, cascade: ['persist', 'remove'])]
+    private $booking;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -137,6 +140,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getBooking(): ?Booking
+    {
+        return $this->booking;
+    }
+
+    public function setBooking(Booking $booking): self
+    {
+        // set the owning side of the relation if necessary
+        if ($booking->getBooker() !== $this) {
+            $booking->setBooker($this);
+        }
+
+        $this->booking = $booking;
 
         return $this;
     }
