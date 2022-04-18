@@ -28,6 +28,9 @@ class Room
     #[ORM\OneToOne(mappedBy: 'room', targetEntity: Booking::class, cascade: ['persist', 'remove'])]
     private $booking;
 
+    #[ORM\OneToOne(inversedBy: 'room', targetEntity: Hostel::class, cascade: ['persist', 'remove'])]
+    private $hostel;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -94,6 +97,18 @@ class Room
         }
 
         $this->booking = $booking;
+
+        return $this;
+    }
+
+    public function getHostel(): ?Hostel
+    {
+        return $this->hostel;
+    }
+
+    public function setHostel(?Hostel $hostel): self
+    {
+        $this->hostel = $hostel;
 
         return $this;
     }

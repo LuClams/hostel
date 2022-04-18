@@ -25,6 +25,9 @@ class Hostel
     #[ORM\Column(type: 'text')]
     private $description;
 
+    #[ORM\OneToOne(mappedBy: 'hostel', targetEntity: Room::class, cascade: ['persist', 'remove'])]
+    private $room;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +77,28 @@ class Hostel
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getRoom(): ?Room
+    {
+        return $this->room;
+    }
+
+    public function setRoom(?Room $room): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($room === null && $this->room !== null) {
+            $this->room->setHostel(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($room !== null && $room->getHostel() !== $this) {
+            $room->setHostel($this);
+        }
+
+        $this->room = $room;
 
         return $this;
     }
