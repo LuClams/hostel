@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\RoomRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+
 #[ORM\Entity(repositoryClass: RoomRepository::class)]
 class Room
 {
@@ -30,6 +31,9 @@ class Room
 
     #[ORM\OneToOne(inversedBy: 'room', targetEntity: Hostel::class, cascade: ['persist', 'remove'])]
     private $hostel;
+
+    #[ORM\ManyToOne(targetEntity: Manager::class, inversedBy: 'room')]
+    private $manager;
 
     public function getId(): ?int
     {
@@ -109,6 +113,18 @@ class Room
     public function setHostel(?Hostel $hostel): self
     {
         $this->hostel = $hostel;
+
+        return $this;
+    }
+
+    public function getManager(): ?Manager
+    {
+        return $this->manager;
+    }
+
+    public function setManager(?Manager $manager): self
+    {
+        $this->manager = $manager;
 
         return $this;
     }
