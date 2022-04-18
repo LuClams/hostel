@@ -17,10 +17,10 @@ class Booking
     #[ORM\JoinColumn(nullable: false)]
     private $booker;
 
-    #[ORM\Column(type: 'dateinterval')]
+    #[ORM\Column(type: 'datetime')]
     private $startDate;
 
-    #[ORM\Column(type: 'dateinterval')]
+    #[ORM\Column(type: 'datetime')]
     private $endDate;
 
     #[ORM\Column(type: 'integer')]
@@ -47,24 +47,24 @@ class Booking
         return $this;
     }
 
-    public function getStartDate(): ?\DateInterval
+    public function getStartDate(): ?\DateTime
     {
         return $this->startDate;
     }
 
-    public function setStartDate(\DateInterval $startDate): self
+    public function setStartDate(\DateTimeInterface $startDate): self
     {
         $this->startDate = $startDate;
 
         return $this;
     }
 
-    public function getEndDate(): ?\DateInterval
+    public function getEndDate(): ?\DateTimeInterface
     {
         return $this->endDate;
     }
 
-    public function setEndDate(\DateInterval $endDate): self
+    public function setEndDate(\DateTimeInterface $endDate): self
     {
         $this->endDate = $endDate;
 
