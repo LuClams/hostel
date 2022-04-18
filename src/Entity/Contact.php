@@ -13,44 +13,20 @@ class Contact
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $email;
 
-    /**
-     * @ORM\Column(type="text")
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $message;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[ORM\Column(type: 'datetime')]
     private $sentAt;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $object;
-
-    /**
-     * @return mixed
-     */
-    public function getObject()
-    {
-        return $this->object;
-    }
-
-    /**
-     * @param mixed $object
-     */
-    public function setObject($object): void
-    {
-        $this->object = $object;
-    }
 
 
     public function getId(): ?int
